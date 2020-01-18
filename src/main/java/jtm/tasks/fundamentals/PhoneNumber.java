@@ -1,21 +1,54 @@
 package jtm.tasks.fundamentals;
 
+import java.util.Arrays;
+
 public class PhoneNumber {
 
-    /*
-    TODO
+	/*
+	 * TODO Write a function that accepts an array of 10 integers (between 0 and 9),
+	 * that returns a string of those numbers in the form of a phone number.
+	 * Example: createPhoneNumber(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}) // =>
+	 * returns "(123) 456-7890" The returned format must be correct in order to
+	 * complete this challenge. Don't forget the space after the closing
+	 * parentheses!
+	 */
 
-    Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers
-    in the form of a phone number.
+	public static String createPhoneNumber(int[] numbers) {
 
-    Example:
-    createPhoneNumber(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 0}) // => returns "(123) 456-7890"
+		// System.out.println(Arrays.toString(numbers));
 
-    The returned format must be correct in order to complete this challenge.
-    Don't forget the space after the closing parentheses!
-     */
+		System.out.println(Arrays.toString(numbers));
+		String a = "(";
+		String phoneNumber;
 
-    public static String createPhoneNumber(int[] numbers) {
-      return null;
-    }
+		for (int i = 0; i < numbers.length; i++) {
+
+			if (i<2) {
+				a = a + numbers[i];
+				continue;
+			}
+			
+			if (i == 2) {
+				a = a + numbers[i] + ") ";
+				continue;
+			}
+			if (i<6) {
+				a = a + numbers[i];
+				continue;
+			}
+			
+			if (i==6) {
+				a = a + "-"+numbers[i] ;
+				continue;
+			}
+			if(i>6) {
+				a = a +numbers[i] ;
+			}
+
+		}
+		phoneNumber = a;
+		System.out.println(a);
+		 
+		return phoneNumber;
+	}
 }
