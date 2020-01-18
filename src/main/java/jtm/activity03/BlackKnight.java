@@ -15,6 +15,7 @@ public class BlackKnight {
 	public static BlackKnight[] knights; // array of knights in the battle
 
 	// instance variables which are separate for each class member (object)
+	
 	public String name; // knight name
 	public byte arms, legs, head; // number of limbs
 	public boolean alive; // is knight alive
@@ -23,7 +24,16 @@ public class BlackKnight {
 		// TODO initialize new array of knights with the passed size.
 		// Reset total numbers of total and alive knights to zero
 		// START
-
+		
+		String [] arrayOfKnights = new String [initialNumber];
+		totalKnights = 0;
+		aliveKnights=0;
+		
+		//String [][] arrayOfKnights = new String [totalKnights][aliveKnights];
+		//for (int i = 0; i < totalKnights; i++) {
+			//arrayOfKnights[i][i] = arrayOfKnights[0][0];
+		//}
+		
 		// END
 	}
 
@@ -38,6 +48,17 @@ public class BlackKnight {
 		// by parameter of constructor, which is also called "name"
 		// START
 
+		this.name = name;
+		this.alive = true;
+		
+		for (int i=0; i<totalKnights; i++) {
+			 int j;
+			setBattle(totalKnights);
+			 arrayOfKnights[][];
+			[i][j] = 
+		}
+		
+		totalKnights++;
 		// END
 	}
 
