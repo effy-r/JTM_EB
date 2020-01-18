@@ -5,7 +5,27 @@ import java.util.Arrays;
 public class Array {
 	static int[] array;
 
+	// }
+
 	public static void main(String[] args) {
+
+		System.out.println(Arrays.toString(args));
+
+		array = new int[args.length];
+		// int array1[] = new int[args.length];
+
+		for (int i = 0; i < args.length; i++) {
+
+			array[i] = Integer.parseInt(args[i]);
+
+		}
+		// Array.array = new array1[args.length];
+
+		Arrays.sort(array);
+		printSortedArray();
+		returnSortedArray();
+		// System.out.println(Arrays.toString(array1));
+
 		// TODO Use passed parameters for main method to initialize array
 		// Hint: use Run— Run configurations... Arguments to pass parameters to
 		// main method when calling from Eclipse
@@ -24,6 +44,9 @@ public class Array {
 		// Hint: use Arrays.toString(array) method for this
 		// START
 
+		// System.out.println("abcd");
+		System.out.println(Arrays.toString(Array.array));
+
 		// END
 	}
 
@@ -32,7 +55,7 @@ public class Array {
 		// START
 
 		// END
-		return null;
+		return Array.array;
 	}
 
 }
