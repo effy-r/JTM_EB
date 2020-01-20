@@ -34,14 +34,14 @@ public class TenMinWalk {
 				length = length + 1;
 
 			}
-			if (walk[i] == 's') {
+			else if (walk[i] == 's') {
 				length = length - 1;
 			}
-			if (walk[i] == 'e') {
+			else if (walk[i] == 'e') {
 				length1 = length1 + 1;
 
 			}
-			if (walk[i] == 'w') {
+			else if (walk[i] == 'w') {
 				length1 = length1 - 1;
 
 			}

@@ -1,10 +1,6 @@
 package jtm.tasks.fundamentals;
 
-import jtm.activity03.Array;
-
 import java.util.Arrays;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 public class SupermarketQueue {
 
@@ -44,7 +40,7 @@ public class SupermarketQueue {
 
 		}
 		if (n == 1) {
-			int sum = 0;
+
 			for (int i : customers) {
 				time += i;
 
@@ -52,120 +48,87 @@ public class SupermarketQueue {
 
 			return time;
 		}
-		
-		System.out.println("----------------------------------------------------------------");
-		System.out.println(Arrays.toString(customers) + "," + n);
-		
+
 		if (n > 1) {
 
 			int[] array1 = new int[n];
 			int minArray1 = customers[0];
+			int array1MinIndex = 0;
+			int equalValues = 0;
 
 			for (int i = 0; i < n; i++) {
 				array1[i] = customers[i];
 
 				// copying customers from the first lines
 			}
-			System.out.println("Newly formed array of lines: " + Arrays.toString(array1));
 
+			// going trough all the customers
 			for (int i = n; i < customers.length; i++) {
 
-				System.out.println("-!_!_!_!_!_!_!_!_! Start of the 1st loop, turn nr.: " + (i-n+1));
-				System.out.println("Array: " + Arrays.toString(array1));
-				System.out.println();
-				//System.out.println("minValue; time of loop: " + (i-n+1) + " : " + minArray1);
-				//System.out.println("The array1; time of the loop:  " + (i-n+1) + " : " + Arrays.toString(array1));
+				// finding min value
+				for (int k = 0; k < array1.length; k++) {
 
+					if (minArray1 > array1[k]) {
+
+						minArray1 = array1[k];
+
+						break;
+
+					}
+				}
+
+				// the index of minimal value
+				for (int k = 0; k < array1.length; k++) {
+
+					if (array1[k] == minArray1) {
+						array1MinIndex = k;
+						equalValues++;
+						continue;
+
+					}
+				}
+
+				// going trough the array1 values
 				for (int j = 0; j < array1.length; j++) {
-					
-					System.out.println("----The start of the second loop");
-					System.out.println("turn number " + (j+1));
-					
-					int array1MinIndex = 0;
-					for (int k=0; k<array1.length; k++) {
-						
-						if (array1[k]==minArray1) {
-							array1MinIndex =k;
-							break;
-						}
-						else {
-							continue;
-						}
-					}
-					
-					System.out.println("---- about the index next 2 lines");
-					System.out.println(array1MinIndex);
-					System.out.println(ArrayUtils.indexOf(array1, minArray1));
+
+					// if the values are the same in array1
 					if (array1[j] == minArray1) {
-						System.out.println("The values are the same");
-						int g=i++;
-						//int array1MinIndex = ArrayUtils.indexOf(array1, minArray1);
-						
-						array1[j] = minArray1 + customers[i];
-						//System.out.println("Value array1[j] is: " + array1[j]);
-						System.out.println("customers i+1 = " +customers[i+1] + " where i = " + i );
-						array1[array1MinIndex] = minArray1 + customers[g];
-						
-						System.out.println("array1[j]=" +array1[j] );
-						System.out.println("array1[array1MinIndex]=" +array1[array1MinIndex] );
-						
-						//System.out.println("Value array1[minValue] is: " + array1[array1MinIndex]);
-						
-						System.out.println();
-						
-						minArray1 = array1[j];
-						
-						//System.out.println("The array1 after changing one of the values" + j + Arrays.toString(array1));
 
-						//System.out.println("The minimal value of the array array1 during the ( j=" + j + "; i=" + i
-								//+ ") " + minArray1 + "for loop.");
-						
-						i++;
-						
-						System.out.println("the i now: " + i);
-						System.out.println("Array: " + Arrays.toString(array1));
-						System.out.println();
-						
-						//continue;
-					}
-					if (array1[j] < minArray1) {
-						array1[j] = array1[j] + customers[i];
+						for (int k = 0; k < equalValues; k++) {
+
+							array1[k] = minArray1 + customers[i];
+
+							i++;
+
+						}
 						minArray1 = array1[j];
 
-						System.out.println("The j>minArray1");
-						System.out.println("--------- " + Arrays.toString(array1));
-						
-						
+						continue;
 					}
 
-//					if (array1[j] < ArrayUtils.indexOf(array1, minArray1)) {
-//						minArray1 = array1[j];
-//						i++;
-//						continue;
-//					} 
-//					else {
-//						int array1MinIndex = ArrayUtils.indexOf(array1, minArray1);
-//						minArray1 = array1[array1MinIndex];
-//					}
+					// if there is a smaler value in the array
+					if (array1[j] > minArray1) {
+
+						array1[array1MinIndex] = array1[array1MinIndex] + customers[i];
+
+						minArray1 = array1[j];
+
+					}
 
 				}
-				System.out.println("--------- " + Arrays.toString(array1));
-				
+
 			}
 
-			System.out.println("--------- Array after all loops" + Arrays.toString(array1));
+			System.out.println("End of loop array:" + Arrays.toString(array1));
 			for (int i = 0; i < n; i++) {
-				if (array1[i] < time) {
+				if (array1[i] > time) {
 
 					time = array1[i];
 
 				}
-				// System.out.println("Time in the loop: " + time);
 
 			}
-			// System.out.println("Time after loop: " + time);
-
-			System.out.println("_________________________________________________________");
+			System.out.println("Time after loop: " + time);
 
 		}
 		return time;
