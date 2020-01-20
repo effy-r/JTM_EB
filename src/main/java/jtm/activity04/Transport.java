@@ -18,10 +18,13 @@ public class Transport extends Road {
 
 	public Transport(String id, float consumption, int tankSize) {
 
+		System.out.println("Transport(String id, float consumption, int tankSize)");
 		this.id = id;
 		this.consumption = consumption;
 		this.tankSize = tankSize;
 		fuelInTank = tankSize;
+		
+		System.out.println(id +"," + consumption +"," +tankSize +  "," + this.fuelInTank);
 	}
 
 	/*- TODO #2
@@ -74,12 +77,14 @@ public class Transport extends Road {
 	protected final String getType() {
 		// TODO return required value
 
+		System.out.println("String getType()");
 		this.getClass().getSimpleName();
 
 		return "" + id + " " + this.getClass().getSimpleName();
 	}
 
 	public String toString() {
+		System.out.println("String toString() Transport");
 		return "Id:" + getType() + " cons:" + String.format(Locale.US, "%.2f", consumption) + "l/100km, tank:"
 				+ tankSize + "l, fuel:" + String.format(Locale.US, "%.2f", fuelInTank);
 
@@ -91,6 +96,7 @@ public class Transport extends Road {
 	// fixed mask
 
 	public String move(Road road) {
+		System.out.println("String move(Road road)");
 		// TODO If transport has enough fuel, decrease actual amount of fuel by
 		// necessary amount and return String in form:
 		// "AAA Type is moving on From–To, 180km"
