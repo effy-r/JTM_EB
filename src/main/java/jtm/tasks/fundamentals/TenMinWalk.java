@@ -30,18 +30,13 @@ public class TenMinWalk {
 		for (int i = 0; i < walk.length; i++) {
 
 			if (walk[i] == 'n') {
-
 				length = length + 1;
-
-			}
-			else if (walk[i] == 's') {
+			} else if (walk[i] == 's') {
 				length = length - 1;
-			}
-			else if (walk[i] == 'e') {
+			} else if (walk[i] == 'e') {
 				length1 = length1 + 1;
 
-			}
-			else if (walk[i] == 'w') {
+			} else if (walk[i] == 'w') {
 				length1 = length1 - 1;
 
 			}

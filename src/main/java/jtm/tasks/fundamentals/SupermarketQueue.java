@@ -34,12 +34,12 @@ public class SupermarketQueue {
 
 			return 0;
 		}
-		if (n == 0) {
+		else if (n == 0) {
 
 			return 0;
 
 		}
-		if (n == 1) {
+		else if (n == 1) {
 
 			for (int i : customers) {
 				time += i;
@@ -49,7 +49,7 @@ public class SupermarketQueue {
 			return time;
 		}
 
-		if (n > 1) {
+		else if (n > 1) {
 
 			int[] array1 = new int[n];
 			int minArray1 = customers[0];
