@@ -15,7 +15,7 @@ public class BlackKnight {
 	public static BlackKnight[] knights; // array of knights in the battle
 
 	// instance variables which are separate for each class member (object)
-	
+
 	public String name; // knight name
 	public byte arms, legs, head; // number of limbs
 	public boolean alive; // is knight alive
@@ -24,16 +24,17 @@ public class BlackKnight {
 		// TODO initialize new array of knights with the passed size.
 		// Reset total numbers of total and alive knights to zero
 		// START
-		
-		String [] arrayOfKnights = new String [initialNumber];
+
+		// BlackKnight [] = new String [initialNumber];
+		String[] arrayOfKnights = new String[initialNumber];
 		totalKnights = 0;
-		aliveKnights=0;
-		
-		//String [][] arrayOfKnights = new String [totalKnights][aliveKnights];
-		//for (int i = 0; i < totalKnights; i++) {
-			//arrayOfKnights[i][i] = arrayOfKnights[0][0];
-		//}
-		
+		aliveKnights = 0;
+
+		// String [][] arrayOfKnights = new String [totalKnights][aliveKnights];
+		// for (int i = 0; i < totalKnights; i++) {
+		// arrayOfKnights[i][i] = arrayOfKnights[0][0];
+		// }
+
 		// END
 	}
 
@@ -50,14 +51,15 @@ public class BlackKnight {
 
 		this.name = name;
 		this.alive = true;
-		
-		for (int i=0; i<totalKnights; i++) {
-			 int j;
+
+		for (int i = 0; i < totalKnights; i++) {
+
 			setBattle(totalKnights);
-			
+
 		}
-		
+
 		totalKnights++;
+		aliveKnights++;
 		// END
 	}
 
@@ -68,19 +70,35 @@ public class BlackKnight {
 		// Else return just "Haah!"
 		// START
 
+		if (!alive) {
+			return "Only chicken beats dead!";
+		} else if (alive & arms > 0) {
+			arms = (byte) (arms - 1);
+			return "Bugger!";
+		} else {
+			return "Haah!";
+		}
 		// END
-		return "";
+
 	}
 
 	public String cutOffLeg() {
+
 		// TODO handle cutting off legs knight's legs in following way:
 		// If knight is dead, return "Only chicken beats dead!"
 		// If knight has some legs, cut one off and return "Bollocks!"
 		// Else return just "Haah!"
 		// START
-
+		if (!alive) {
+			return "Only chicken beats dead!";
+		} else if (alive & legs > 0) {
+			legs = (byte) (legs - 1);
+			return "Bugger!";
+		} else {
+			return "Haah!";
+		}
 		// END
-		return "";
+
 	}
 
 	public String cutOffHead() {
@@ -93,9 +111,33 @@ public class BlackKnight {
 		// Where "Arthur, Cnut" are names of still alive knights
 		// Else return "You'l burn in hell forever!"
 		// START
+		if (!alive) {
+			return "Only chicken beats dead!";
 
-		// END
-		return "";
+		} else if (alive & head > 0) {
+
+			aliveKnights = (short) (aliveKnights - 1);
+			deadKnights = (short) (deadKnights + 1);
+
+			if (aliveKnights > 0) {
+
+				String namesOfAllive = null;
+
+				for (int i = 0; i < knights.length; i++) {
+
+					if (i == (knights.length - 1)) {
+						namesOfAllive = namesOfAllive + knights[i];
+					}
+					namesOfAllive = namesOfAllive + knights[i] + ", ";
+				}
+
+				return "You'l newer win!" + namesOfAllive + " will still fight!";
+			} else {
+				return "You'l burn in hell forever!";
+			}
+
+		}
+		return name;
 	}
 
 	// START
@@ -105,7 +147,17 @@ public class BlackKnight {
 		// e.g. if Cnut and Arthur are still alive return Cnut, Arthur
 		// If only Arthur is alive return Arthur
 		// If no one is alive return empty string
-		return null;
+
+		if (aliveKnights > 1) {
+
+			return null;
+		} else if (aliveKnights == 1) {
+			return name;
+
+		} else {
+
+			return "";
+		}
+		// END
 	}
-	// END
 }
