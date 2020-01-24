@@ -54,8 +54,7 @@ public class BlackKnight {
 		for (int i=0; i<totalKnights; i++) {
 			 int j;
 			setBattle(totalKnights);
-			 arrayOfKnights[][];
-			[i][j] = 
+			
 		}
 		
 		totalKnights++;

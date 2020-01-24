@@ -36,6 +36,7 @@ public class Road {
 	 */
 
 	public Road(String from, String to, int distance) {
+
 		this.from = from;
 		this.to = to;
 		this.distance = distance;
@@ -54,9 +55,10 @@ public class Road {
 	 * Generate getters and Setters for distance, from and to fields
 	 */
 
-	
 	public String toString() {
+
 		return getFrom() + " — " + getTo() + ", " + getDistance() + "km";
+
 	}
 
 	/*- TODO #4
@@ -67,6 +69,5 @@ public class Road {
 	 * Note that — is not dash ("minus key" in jargon), but m-dash!
 	 * See more at: https://en.wikipedia.org/wiki/Dash
 	 */
-	
 
 }

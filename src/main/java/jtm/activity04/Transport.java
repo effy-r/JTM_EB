@@ -18,13 +18,11 @@ public class Transport extends Road {
 
 	public Transport(String id, float consumption, int tankSize) {
 
-		System.out.println("Transport(String id, float consumption, int tankSize)");
 		this.id = id;
 		this.consumption = consumption;
 		this.tankSize = tankSize;
 		fuelInTank = tankSize;
-		
-		System.out.println(id +"," + consumption +"," +tankSize +  "," + this.fuelInTank);
+
 	}
 
 	/*- TODO #2
@@ -35,6 +33,7 @@ public class Transport extends Road {
 	}
 
 	public void setId(String id) {
+
 		this.id = id;
 	}
 
@@ -43,6 +42,7 @@ public class Transport extends Road {
 	}
 
 	public void setConsumption(float consumption) {
+
 		this.consumption = consumption;
 	}
 
@@ -51,6 +51,7 @@ public class Transport extends Road {
 	}
 
 	public void setTankSize(int tankSize) {
+
 		this.tankSize = tankSize;
 	}
 
@@ -59,6 +60,7 @@ public class Transport extends Road {
 	}
 
 	public void setFuelInTank(float fuelInTank) {
+
 		this.fuelInTank = fuelInTank;
 	}
 
@@ -75,18 +77,17 @@ public class Transport extends Road {
 	// HINT: use this.getClass().getSimpleName(); to get type of transport
 
 	protected final String getType() {
+
 		// TODO return required value
 
-		System.out.println("String getType()");
-		this.getClass().getSimpleName();
-
 		return "" + id + " " + this.getClass().getSimpleName();
+
 	}
 
 	public String toString() {
-		System.out.println("String toString() Transport");
-		return "Id:" + getType() + " cons:" + String.format(Locale.US, "%.2f", consumption) + "l/100km, tank:"
-				+ tankSize + "l, fuel:" + String.format(Locale.US, "%.2f", fuelInTank);
+
+		return "Id:" + id + " cons:" + String.format(Locale.US, "%.1f", consumption) + "l/100km, tank:" + tankSize
+				+ "l, fuel:" + String.format(Locale.US, "%.2f", fuelInTank) + "l";
 
 	}
 
@@ -96,7 +97,7 @@ public class Transport extends Road {
 	// fixed mask
 
 	public String move(Road road) {
-		System.out.println("String move(Road road)");
+
 		// TODO If transport has enough fuel, decrease actual amount of fuel by
 		// necessary amount and return String in form:
 		// "AAA Type is moving on From–To, 180km"
@@ -104,18 +105,18 @@ public class Transport extends Road {
 		// "Cannot move on From–To, 180km. Necessary
 		// fuel:0.00l, fuel in tank:0.00l"
 
-		float fuelRequired = (getDistance() * getConsumption()) / 100;
+		float fuelRequired = (road.getDistance() * getConsumption()) / 100;
 		String text = null;
-		
-		System.out.println("move(Road road)");
 
-		if (fuelRequired <= getFuelInTank()) {
+		if (fuelRequired < getFuelInTank()) {
 
-			text = getType() + " is moving on " + getFrom() + " — " + getTo() + ", " + getDistance() + "km";
+			text = getType() + " is moving on " + road.toString();
+			setFuelInTank(getFuelInTank() - fuelRequired);
 
 		} else if (fuelRequired > getFuelInTank()) {
-			text = "Cannot move on " + getFrom() + " — " + getTo() + ", " + getDistance() + "km. Necessary fuel:"
-					+ String.format(Locale.US, "%.2f", fuelRequired) + "l, fuel in tank:" + fuelInTank + "l";
+			text = "Cannot move on " + road.toString() + ". Necessary fuel:"
+					+ String.format(Locale.US, "%.2f", fuelRequired) + "l, fuel in tank:"
+					+ String.format(Locale.US, "%.2f", fuelInTank) + "l";
 
 		}
 
