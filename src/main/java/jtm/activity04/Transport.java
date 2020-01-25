@@ -107,8 +107,12 @@ public class Transport extends Road {
 
 		float fuelRequired = (road.getDistance() * getConsumption()) / 100;
 		String text = null;
+		
+
 
 		if (fuelRequired < getFuelInTank()) {
+			
+			
 
 			text = getType() + " is moving on " + road.toString();
 			setFuelInTank(getFuelInTank() - fuelRequired);

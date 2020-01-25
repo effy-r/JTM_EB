@@ -1,5 +1,7 @@
 package jtm.activity03;
 
+import java.util.Arrays;
+
 /**
  * Black Knight is brave soldier who fights till he is alive. He doesn't bother
  * if some of his arms or legs are cut off. You can kill him only when he lose
@@ -25,15 +27,12 @@ public class BlackKnight {
 		// Reset total numbers of total and alive knights to zero
 		// START
 
-		// BlackKnight [] = new String [initialNumber];
-		String[] arrayOfKnights = new String[initialNumber];
+		knights = new BlackKnight[(initialNumber)];
+
+		System.out.println(Arrays.toString(knights));
+
 		totalKnights = 0;
 		aliveKnights = 0;
-
-		// String [][] arrayOfKnights = new String [totalKnights][aliveKnights];
-		// for (int i = 0; i < totalKnights; i++) {
-		// arrayOfKnights[i][i] = arrayOfKnights[0][0];
-		// }
 
 		// END
 	}
@@ -50,11 +49,18 @@ public class BlackKnight {
 		// START
 
 		this.name = name;
-		this.alive = true;
+		this.alive = true; // default its true, but anyway want to write it here
+		arms = 2;
+		legs = 2;
+		head = 1;
 
-		for (int i = 0; i < totalKnights; i++) {
+		for (int i = 0; i <= totalKnights; i++) {
 
-			setBattle(totalKnights);
+			if (knights[i] == null) {
+				knights[i] = this; // this here puts the BlackKnight in the BlackKnight array
+			} else {
+				continue;
+			}
 
 		}
 
@@ -93,7 +99,7 @@ public class BlackKnight {
 			return "Only chicken beats dead!";
 		} else if (alive & legs > 0) {
 			legs = (byte) (legs - 1);
-			return "Bugger!";
+			return "Bollocks!";
 		} else {
 			return "Haah!";
 		}
@@ -111,53 +117,67 @@ public class BlackKnight {
 		// Where "Arthur, Cnut" are names of still alive knights
 		// Else return "You'l burn in hell forever!"
 		// START
+
+		String text = null;
+
 		if (!alive) {
+
 			return "Only chicken beats dead!";
 
-		} else if (alive & head > 0) {
+		} else if (alive & (head > 0)) {
 
 			aliveKnights = (short) (aliveKnights - 1);
 			deadKnights = (short) (deadKnights + 1);
+			alive = false;
 
 			if (aliveKnights > 0) {
 
-				String namesOfAllive = null;
-
-				for (int i = 0; i < knights.length; i++) {
-
-					if (i == (knights.length - 1)) {
-						namesOfAllive = namesOfAllive + knights[i];
-					}
-					namesOfAllive = namesOfAllive + knights[i] + ", ";
-				}
-
-				return "You'l newer win!" + namesOfAllive + " will still fight!";
+				text = "You'l newer win!" + aliveKnights() + " will still fight!";
 			} else {
-				return "You'l burn in hell forever!";
+				text = "You'l burn in hell forever!";
 			}
 
 		}
-		return name;
+		return text;
+
 	}
 
-	// START
 	private String aliveKnights() {
+
+		String alive = " ";
 		// TODO
 		// Build comma separated string of knights who are still alive
 		// e.g. if Cnut and Arthur are still alive return Cnut, Arthur
 		// If only Arthur is alive return Arthur
 		// If no one is alive return empty string
 
-		if (aliveKnights > 1) {
+		for (int i = 0; i < knights.length; i++) {
 
-			return null;
-		} else if (aliveKnights == 1) {
-			return name;
+			if (aliveKnights > 1) {
 
-		} else {
+				if (knights[i].alive) {
 
-			return "";
+					if (i == (knights.length - 1)) {
+
+						alive = alive + knights[i].name;
+					} else {
+
+						alive = alive + knights[i].name + ", ";
+
+					}
+
+				}
+
+			} else if (aliveKnights == 1) {
+
+				if (knights[i].alive) {
+
+					alive = alive + knights[i].name;
+				}
+			}
+
 		}
-		// END
+
+		return alive;
 	}
 }

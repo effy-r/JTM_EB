@@ -9,7 +9,8 @@ public class WaterRoad extends Road {
 		// TODO Auto-generated method stub
 		
 		
-		return "Water Road " + super.toString();
+		
+		return "WaterRoad " + super.toString();
 	}
 
 	public WaterRoad() {
