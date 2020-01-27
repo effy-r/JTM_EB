@@ -98,5 +98,6 @@ public class LetsRide {
 	public void setSeatsCount(int seatsCount) {
 		this.seatsCount = seatsCount;
 	}
-
+	
+	 
 }
