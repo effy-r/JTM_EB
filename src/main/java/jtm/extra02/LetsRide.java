@@ -27,11 +27,7 @@ public class LetsRide {
 		// will be increased by 2 and so on until bus reaches route end.
 		// Note: Overall passenger count can't exceed seat count
 
-		System.out.println("passengersAtStart " + passengersAtStart);
-
-		System.out.println("busStopCount " + busStopCount);
-		System.out.println("passengersCount " + passengersCount);
-		System.out.println("seatsCount " + seatsCount);
+		
 
 		passengersCount = passengersAtStart;
 		for (int i = 0; i <= busStopCount; i++) {
@@ -39,7 +35,7 @@ public class LetsRide {
 			passengersCount = passengersCount + i;
 
 			if (passengersCount == seatsCount) {
-				System.out.println("passengersCount=seatscount " + passengersCount);
+				
 				break;
 			}
 
