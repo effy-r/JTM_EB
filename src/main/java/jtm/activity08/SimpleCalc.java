@@ -14,22 +14,72 @@ public class SimpleCalc {
 
     public static Integer add(int a, int b) {
         // TODO implement adding operation
-		return null;
+    	
+    	//if (a<=10 && a>=-10 && b<=10 && b>=-10) {
+    	
+    	try {
+    		validateInput(a, b);
+    		int result = a+b;
+    		validateOutput(result);
+    		return result;
+    	}
+    	catch (SimpleCalcException sumEx){
+    		sumEx.printStackTrace();
+    		
+    		return null;
+    	}
+    	
+    	
     }
 
     public static Integer subtract(int a, int b) {
         // TODO implement subtract operation
-		return null;
+    	
+		try {
+    		validateInput(a, b);
+    		int result = a-b;
+    		validateOutput(result);
+    		return result;
+    	}
+    	catch (SimpleCalcException sumEx){
+    		sumEx.printStackTrace();
+    		
+    		return null;
+    	}
+    	
+    	
     }
 
     public static Integer multiply(int a, int b) {
         // TODO implement multiply operation
-		return null;
+    	try {
+    		validateInput(a, b);
+    		int result = a*b;
+    		validateOutput(result);
+    		return result;
+    		
+    	}
+    	catch (SimpleCalcException sumEx){
+    		sumEx.printStackTrace();
+    		
+    		return null;
+    	}
     }
 
     public static Integer divide(int a, int b) {
         // TODO implement divide operation
-		return null;
+    	try {
+    		validateInput(a, b);
+    		int result = a/b;
+    		validateOutput(result);
+    		return result;
+    	
+    	}
+    	catch (SimpleCalcException sumEx){
+    		sumEx.printStackTrace();
+    		
+    		return null;
+    	}
     }
 
 	// TODO
@@ -44,6 +94,14 @@ public class SimpleCalc {
 
 	private static void validateInput(int a, int b) throws SimpleCalcException {
 
+		if (a>10 || a<-10) {
+			throw new SimpleCalcException("Input value " + a + " is out of range [-10,10]");
+			
+			
+		} else if (b>10 || b <-10) {
+			throw new SimpleCalcException("Input value " + b + " is out of range [-10,10]");
+		}
+		
     }
 
 	// TODO
@@ -56,5 +114,8 @@ public class SimpleCalc {
     */
     private static void validateOutput(int result) throws SimpleCalcException {
 		
+    	if (result>10 || result<-10) {
+    		throw new SimpleCalcException("Input value " + result + " is out of range [-10,10]");
+    	}
     }
 }
