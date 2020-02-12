@@ -42,7 +42,7 @@ public class PracticalNumbers {
 			}
 		}
 
-		
+		System.out.println("The prime numbers + " + Arrays.toString(primeNumbers.toArray())); 
 		
 		while (from <= to) {
 
@@ -59,7 +59,7 @@ public class PracticalNumbers {
 				}
 
 			}
-			System.out.println(Arrays.toString(myList.toArray()));
+			System.out.println("The divisors of " + from + Arrays.toString(myList.toArray()));
 
 			for (int k = 0; k < myList.size(); k++) {
 
@@ -67,14 +67,32 @@ public class PracticalNumbers {
 
 			}
 
-			if ((sum+1) >= (2*from)) {
+			if ((sum) >= (2*from)) {
+				
+				int n=1;
+			
+				for (int i=1; i<from; i++) {
+					
+					//int n = 1;
+					
+					for (int j =0; j<myList.size(); j++) {
+						if (n % myList.get(j)==0) {
+							n++;
+							break;
+						}
+						//if else (n-)
+					}
+					//n++;
+				}
+				if (n==from) {
 
 				practicalNumbers.add(from);
+				}
 			}
 			from++;
 		}
 
-		System.out.println(Arrays.toString(practicalNumbers.toArray()));
+		System.out.println("Practical numbers " + Arrays.toString(practicalNumbers.toArray()));
 		// myList.toArray();
 
 		return Arrays.toString(practicalNumbers.toArray());
