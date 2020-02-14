@@ -1,5 +1,9 @@
 package jtm.activity09;
 
+import java.util.List;
+import java.util.Set;
+
+//public Iterator<Orders> orders;
 
 /*- TODO #2
  * Implement Iterator interface with Orders class
@@ -30,6 +34,41 @@ package jtm.activity09;
  */
 
 public class Orders {
+	
+	public Orders() {
+		Orders order = new Orders();
+	}
+	
+	public void add(Order item)  {
+		
+	}
+	
+	public List<Order> getItemsList(){
+		return null;
+		
+	}
+	public Set<Order> getItemsSet() {
+		return null;
+		
+	}
+	public void sort() {
+		
+	}
+	public boolean hasNext() {
+		return false;
+		
+	}
+	public Order next() {
+		return null;
+		
+	}
+	
+	public void remove() {
+		
+	}
+	public String toString() {
+		return null;
+	}
 	/*-
 	 * TODO #1
 	 * Create data structure to hold:
