@@ -139,6 +139,8 @@ public class PersonRepo {
 		}
 		
 		biggestPopulation = countryList.get(population);
+		
+		System.out.println(biggestPopulation);
 		// Find country with largest population and return it's name
 		return biggestPopulation;
 	}

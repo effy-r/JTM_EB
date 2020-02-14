@@ -69,6 +69,15 @@ public class Orders {
 	public String toString() {
 		return null;
 	}
+	
+	
+	//missing methods
+//	public java.lang.Object jtm.activity09.Orders.next()
+//	public java.lang.String jtm.activity09.Orders.toString()
+//	public java.util.List jtm.activity09.Orders.getItemsList()
+//	public java.util.Set jtm.activity09.Orders.getItemsSet()
+//	public jtm.activity09.Order jtm.activity09.Orders.next()
+	
 	/*-
 	 * TODO #1
 	 * Create data structure to hold:
