@@ -21,6 +21,8 @@ public class SimpleCalcTest {
 
 	@Before
 	public void setUp() {
+		
+		
 		// TODO initialize SimpleCalc object
 	}
 

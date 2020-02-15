@@ -44,7 +44,7 @@ import jtm.activity10.Person;
 public class Orders implements Iterator<Order> {
 
 	public List<Order> orderList;
-	public ListIterator orderIterator;
+	public ListIterator<Order> orderIterator;
 
 	public Orders() {
 		orderList = new ArrayList<Order>();
