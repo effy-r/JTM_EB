@@ -56,24 +56,22 @@ public class Orders implements Iterator<Order> {
 	public void add(Order item) {
 		
 		orderIterator.add(item);
-		if (orderIterator.hasPrevious()) {
+		
 			orderIterator.previous();
-		}
+		
 		//orderIterator.previous();
 	}
 
 	public List<Order> getItemsList() {
 
-		List copyList = null;
-		extracted(copyList);
+		List <Order> copyList = new ArrayList<Order>();
+		Collections.copy(orderList, copyList);
 
 		return copyList;
 
 	}
 
-	private void extracted(List copyList) {
-		Collections.copy(copyList, orderIterator);
-	}
+	
 
 	public Set<Order> getItemsSet() {
 
