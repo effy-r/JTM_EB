@@ -1,5 +1,12 @@
 package jtm.activity09;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Map;
+
 /*- TODO #1
  * Implement Comparable interface with Order class
  * Hint! Use generic type of comparable items in form: Comparable<Order>
@@ -29,38 +36,122 @@ public class Order implements Comparable<Order> {
 	String customer; // Name of the customer
 	String name; // Name of the requested item
 	int count; // Count of the requested items
+	private List<Order> hashCodeInt;
 
-	
-	 public Order(String orderer, String itemName, Integer count) {
+	public Order(String orderer, String itemName, Integer count) {
 		customer = orderer;
 		name = itemName;
 		this.count = count;
-		 
-	 }
-	
-	 public boolean equals (Object object) {
-		 if (object == customer) {
+
+	}
+
+//	public boolean equals(Object object) {
+//
+//		System.out.println("Objekts: " + object);
+//		System.out.println("Order: " + Order.this);
+//
+//		if (this.toString().contentEquals(object.toString())) {
+//
+//			System.out.println("True statement");
+//
+//			return true;
+//
+//		} else {
+//
+//			System.out.println("False statement");
+//
+//			return false;
+//		}
+//	}
+//
+//	
+//	@Override
+//	public int hashCode() {
+//
+//		int hash = 0;
+//
+//		if (equals(this)) {
+//			
+//			hash = 5;
+//		}
+//		else {
+//			hash = (count*15)-3;
+//			
+//
+//	}
+//		return hash;
+//	}
+
+	@Override
+	public String toString() {
+		return "ItemName: " + name + " OrdererName: " + customer + " Count " + count;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + count;
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((hashCodeInt == null) ? 0 : hashCodeInt.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		 }
-		 else {
+		if (obj == null)
 			return false;
-		 }
-	 }
-	 
-	 public int hashCode() {
-		return count;
-		 
-	 }
-	 
-	 public String toString() {
-		 return "ItemName:" + name + " OrdererName: " + customer + "Count" + count;
-	 }
-	 
-	 
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (count != other.count)
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (hashCodeInt == null) {
+			if (other.hashCodeInt != null)
+				return false;
+		} else if (!hashCodeInt.equals(other.hashCodeInt))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
 
 	@Override
 	public int compareTo(Order order) {
 		// TODO Auto-generated method stub
-		
+
+		if ((Order.this.name.compareTo(order.name) != 0)) {
+
+			return ((Order.this.name.compareTo(order.name)) > 0) ? 1 : -1;
+		}
+
+		else if ((Order.this.customer.compareTo(order.customer) != 0)) {
+
+			return ((Order.this.customer.compareTo(order.customer)) > 0) ? 1 : -1;
+		} else if ((Order.this.count != (order.count))) {
+
+			return (Order.this.count > order.count) ? 1 : -1;
+		}
+
 		return 0;
-	}}
+
+	}
+}
+
+/*
+ * java.lang.AssertionError: 'ItemName: ItemNameA OrdererName: OrdererACount
+ * 10'. compareTo('ItemName: ItemNameA OrdererName: OrdererBCount 10') customer
+ * comparison error. expected:<-1> but was:<0>
+ * 
+ */

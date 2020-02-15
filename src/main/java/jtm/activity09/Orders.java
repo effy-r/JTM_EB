@@ -1,7 +1,15 @@
 package jtm.activity09;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
+
+import jtm.activity10.Person;
 
 //public Iterator<Orders> orders;
 
@@ -33,51 +41,94 @@ import java.util.Set;
  *  - ItemN: Customer1,Customer2: 4
  */
 
-public class Orders {
-	
+public class Orders implements Iterator<Order> {
+
+	public List<Order> orderList;
+	public ListIterator orderIterator;
+
 	public Orders() {
-		Orders order = new Orders();
+		orderList = new ArrayList<Order>();
+		// this.orderIterator = orderIterator;
+		orderIterator = orderList.listIterator();
+
 	}
-	
-	public void add(Order item)  {
+
+	public void add(Order item) {
 		
+		orderIterator.add(item);
+		if (orderIterator.hasPrevious()) {
+			orderIterator.previous();
+		}
+		//orderIterator.previous();
 	}
-	
-	public List<Order> getItemsList(){
-		return null;
-		
+
+	public List<Order> getItemsList() {
+
+		List copyList = null;
+		extracted(copyList);
+
+		return copyList;
+
 	}
+
+	private void extracted(List copyList) {
+		Collections.copy(copyList, orderIterator);
+	}
+
 	public Set<Order> getItemsSet() {
-		return null;
-		
+
+		// Set copySet = null;
+
+		Set<Order> copySet = new HashSet<Order>();
+
+		for (int i = 0; i < orderList.size(); i++) {
+			copySet.add(orderList.get(i));
+		}
+
+		return copySet;
+
 	}
+
 	public void sort() {
-		
+
+		Collections.sort(orderList);
 	}
+
+	@Override
 	public boolean hasNext() {
-		return false;
-		
+
+		return orderIterator.hasNext();
+
 	}
+
+	@Override
 	public Order next() {
-		return null;
 		
+		//order = orderIterator.next();
+		
+		return (Order) this.orderIterator.next();
+
 	}
-	
+
 	public void remove() {
-		
+		orderIterator.remove();
+
 	}
+
+	@Override
 	public String toString() {
-		return null;
+
+		return Arrays.toString(orderList.toArray());
+
 	}
-	
-	
-	//missing methods
+
+	// missing methods
 //	public java.lang.Object jtm.activity09.Orders.next()
 //	public java.lang.String jtm.activity09.Orders.toString()
 //	public java.util.List jtm.activity09.Orders.getItemsList()
 //	public java.util.Set jtm.activity09.Orders.getItemsSet()
 //	public jtm.activity09.Order jtm.activity09.Orders.next()
-	
+
 	/*-
 	 * TODO #1
 	 * Create data structure to hold:

@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PersonRepo {
 
 	private List<Person> personList;
-	//private List<Person> countryList;
+	// private List<Person> countryList;
 
 	public PersonRepo() {
 		init();
@@ -36,14 +36,7 @@ public class PersonRepo {
 
 		try {
 
-//			File fileData = new File(
-//					"/home/student/Desktop/javabootcamp-studentsproject-09047f538cba/src/main/resources/data.json");
-
-			// Path path =
-			// "/home/student/Desktop/javabootcamp-studentsproject-09047f538cba/src/main/resources/data.json";
-
-			// BufferedReader reader = new BufferedReader(new FileReader(fileData));
-
+	
 			Path pathToFile = Paths.get(
 					"/home/student/Desktop/javabootcamp-studentsproject-09047f538cba/src/main/resources/data.json");
 			List<String> linesInList = Files.readAllLines(pathToFile);
@@ -54,15 +47,6 @@ public class PersonRepo {
 
 			personList = objectMapper.readValue(res, new TypeReference<List<Person>>() {
 			});
-			
-			//countryList = objectMapper.readValue(res, new TypeReference<List<Person>>()
-			
-			
-
-//			System.out.println(Arrays.toString(personList.toArray()));
-//			System.out.println("The size of the array" + personList.size());
-
-			// reader.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,7 +80,6 @@ public class PersonRepo {
 
 	public Person youngestPerson() {
 
-
 		Person YoungestPerson = personList.get(0);
 
 		for (int i = 1; i < personList.size(); i++) {
@@ -108,38 +91,37 @@ public class PersonRepo {
 		}
 		// Find oldest person in personList field and return it
 		return YoungestPerson;
-		
+
 	}
 
 	public String largestPopulation() {
-		
-		//List <int> populationList = new List <int>;
-		
+
+		// List <int> populationList = new List <int>;
+
 		int population = 0;
 		String biggestPopulation = null;
-		
+
 		ArrayList<String> countryList = new ArrayList<String>();
-		
+
 		for (int i = 0; i < personList.size(); i++) {
-			
+
 			countryList.add(personList.get(i).getCountry());
-			
-			
-			}
-		
-		for (int i=0; i<countryList.size(); i++) {
-			
+
+		}
+
+		for (int i = 0; i < countryList.size(); i++) {
+
 			if (population < Collections.frequency(countryList, countryList.get(i))) {
-				
-				//Collections.frequency(countryList, countryList.get(i));
-			
+
+				// Collections.frequency(countryList, countryList.get(i));
+
 				population = i;
 
 			}
 		}
-		
+
 		biggestPopulation = countryList.get(population);
-		
+
 		System.out.println(biggestPopulation);
 		// Find country with largest population and return it's name
 		return biggestPopulation;
