@@ -5,7 +5,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class MorseCode {
+public class MorseCode extends MorseCodeData{
 
     /*
         TODO
@@ -23,7 +23,10 @@ public class MorseCode {
             Note that morse code does not have capitalization e.g. T and t are both the same in morse code: '-'
 
      */
+	
     public static String translateToMorse(String text) {
+    	
+    	//should open the file, go trough the file and compare to each line
         return null;
     }
 
