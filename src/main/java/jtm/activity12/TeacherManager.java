@@ -17,6 +17,18 @@ public class TeacherManager {
     protected Connection conn;
 
     public TeacherManager() {
+    	
+    	try {{
+    	
+    	 Class.forName("com.mysql.jdbc.Driver"); // Load the driver class.
+    	}
+    	catch (Exception e) {
+    		System.err.println(e);
+    	}
+    	finally {
+    		conn.close();
+    	}
+    }
         /* TODO
 		  When new TeacherManager is created, create connection to the database server:
 
