@@ -8,127 +8,219 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+import com.mysql.jdbc.Statement;
+
 public class TeacherManager {
 
-    public static void main(String[] args) {
-        System.out.println(new TeacherManager().findTeacher(1));
-    }
+	public static void main(String[] args) {
+		System.out.println(new TeacherManager().findTeacher(1));
+	}
 
-    protected Connection conn;
+	protected Connection conn;
 
-    public TeacherManager() {
-    	
-    	try {
-    	
-    	 Class.forName("com.mysql.jdbc.Driver"); // Load the driver class.
-    	 conn = DriverManager.getConnection(
-                 "jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&characterEncoding=utf8", "admin", "abcd1234"
-         );
-    	 
-    	}
-    	catch (Exception e) {
-    		System.err.println(e);
-    	}
-    	finally {
-    		try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public TeacherManager() {
+
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver"); // Load the driver class.
+			conn = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&characterEncoding=utf8", "admin",
+					"abcd1234");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		/*
+		 * TODO When new TeacherManager is created, create connection to the database
+		 * server:
+		 * 
+		 * Class.forName("com.mysql.jdbc.Driver"); conn = DriverManager.getConnection(
+		 * "jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&characterEncoding=utf8",
+		 * "admin", "abcd1234" );
+		 * 
+		 * conn.setAutoCommit(false); //Use conn.commit() after each
+		 * Insert/Update/Delete call
+		 */
+
+	}
+
+	/*
+	 * Returns a Teacher instance represented by the specified ID.
+	 */
+	public Teacher findTeacher(int id) {
+
+		Teacher foundTeacher = null;
+
+		try {
+			Statement st = (Statement) conn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT Id, firstName, lastName FROM Teacher WHERE Id = " + id + ";");
+			// while (rs.next()) {
+			rs.next();
+			String firstName = rs.getString("firstName");
+			int idTeacher = rs.getInt("Id");
+			String lastName = rs.getString("lastName");
+
+			// System.out.println(firstName + "\t" + idTeacher +
+			// "\t" + lastName + "\t");
+
+			foundTeacher = new Teacher(idTeacher, firstName, lastName);
+			// rs.next();
+			// }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		/*
+		 * TODO Execute an SQL statement that searches teacher by ID. If teacher is
+		 * found return Teacher object with values from DB If teacher is not found
+		 * return null
+		 */
+		return foundTeacher;
+
+	}
+
+	/**
+	 * Returns a list of Teacher objects.
+	 */
+	public List<Teacher> findTeacher(String firstName, String lastName) {
+		List<Teacher> teachers = new ArrayList<Teacher>();
+
+		try {
+			Statement st = (Statement) conn.createStatement();
+			ResultSet rs = st.executeQuery("SELECT Id, firstName, lastName FROM Teacher WHERE firstName='" + firstName
+					+ "' OR lastName='" + lastName + "';");
+
+			while (rs.next()) {
+				Teacher one = new Teacher(rs.getInt("Id"), rs.getString("firstName"), rs.getString("lastName"));
+				teachers.add(one);
 			}
-    	}
-    
-        /* TODO
-		  When new TeacherManager is created, create connection to the database server:
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*
+		 * TODO Write an sql statement that searches teacher by first and last name and
+		 * returns results as ArrayList<Teacher>. Result list should include all partial
+		 * results as well, e.g. if first name is matching but last name is not still
+		 * include, the teacher in result list, same applies for lastName If nothing is
+		 * found return empty list!
+		 */
+		return teachers;
+	}
 
-         	Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&characterEncoding=utf8", "admin", "abcd1234"
-            );
+	/**
+	 * Insert an new teacher (first name and last name) into the table.
+	 */
+	public boolean insertTeacher(String firstName, String lastName) {
 
-            conn.setAutoCommit(false); //Use conn.commit() after each Insert/Update/Delete call
-         */
-        try {
+		try {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			Statement st = (Statement) conn.createStatement();
+			st.executeUpdate(
+					"INSERT INTO Teacher (firstName, lastName) VALUES ('" + firstName + "', '" + lastName + "');");
 
-    /*
-     * Returns a Teacher instance represented by the specified ID.
-     */
-    public Teacher findTeacher(int id) {
-        /*
-         TODO
-         Execute an SQL statement that searches teacher by ID.
-         If teacher is found return Teacher object with values from DB
-         If teacher is not found return null */
-        return null;
-    }
+			return true;
 
-    /**
-     * Returns a list of Teacher objects.
-     */
-    public List<Teacher> findTeacher(String firstName, String lastName) {
-        /* TODO
-           Write an sql statement that searches teacher by first and last name and returns results as ArrayList<Teacher>.
-           Result list should include all partial results as well, e.g. if first name is matching but last name is not
-           still include, the teacher in result list, same applies for lastName
-           If nothing is found return empty list! */
-        return null;
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		/*
+		 * TODO Execute an SQL statement that inserts teacher in database. SQL statement
+		 * should contain only firstName and lastName, ID should be automatically
+		 * generated by DB
+		 */
+		// return true;
+	}
 
-    /**
-     * Insert an new teacher (first name and last name) into the table.
-     */
-    public boolean insertTeacher(String firstName, String lastName) {
-        /* TODO
-           Execute an SQL statement that inserts teacher in database.
-           SQL statement should contain only firstName and lastName, ID should be automatically generated by DB */
-        return false;
-    }
+	/**
+	 * Insert teacher object into database
+	 */
+	public boolean insertTeacher(Teacher teacher) {
 
-    /**
-     * Insert teacher object into database
-     */
-    public boolean insertTeacher(Teacher teacher) {
-        /*
-        TODO
-        Execute an SQL statement that inserts teacher in database.
-        SQL statement should contain all fields: id, firstName and lastName
-        If teacher is inserted successfully return true, otherwise false */
+		return insertTeacher(teacher.getFirstName(), teacher.getLastName());
 
-        return false;
+//		try {
+//
+//			Statement st = (Statement) conn.createStatement();
+//			st.executeUpdate("INSERT INTO Teacher (firstName, lastName) VALUES ('" + teacher.getFirstName() + "', '"
+//					+ teacher.getLastName() + "');");
+//
+//			return true;
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
 
-    }
+		/*
+		 * TODO Execute an SQL statement that inserts teacher in database. SQL statement
+		 * should contain all fields: id, firstName and lastName If teacher is inserted
+		 * successfully return true, otherwise false
+		 */
 
-    /**
-     * Updates an existing Teacher in the repository with the values represented by the Teacher object.
-     */
-    public boolean updateTeacher(Teacher teacher) {
-        /*
-            TODO
-            Execute an SQL statement that updates teacher information.
-            Update teacher in database by it's ID
-            If ONE teacher is successfully updated, return true, otherwise false */
-        return false;
-    }
+		// return false;
 
+	}
 
-    public boolean deleteTeacher(int id) {
-        /*
-            TODO
-            Execute an SQL statement that deletes teacher from database.
-            Delete teacher by it's ID
-            If one teacher is successfully deleted, return true
-            If no teacher is deleted return false */
-        return false;
-    }
+	/**
+	 * Updates an existing Teacher in the repository with the values represented by
+	 * the Teacher object.
+	 */
+	public boolean updateTeacher(Teacher teacher) {
 
-    public void closeConnection() {
-        /*
-            TODO
-            Close connection to the database server and reset conn object to null */
-    }
+		try {
+
+			Statement st = (Statement) conn.createStatement();
+			st.executeUpdate("UPDATE Teacher SET lastName = '" + teacher.getFirstName() + "', SET firstName='"
+					+ teacher.getFirstName() + "' WHERE Id=" + teacher.getId() + ";");
+
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		/*
+		 * TODO Execute an SQL statement that updates teacher information. Update
+		 * teacher in database by it's ID If ONE teacher is successfully updated, return
+		 * true, otherwise false
+		 */
+		// return false;
+	}
+
+	public boolean deleteTeacher(int id) {
+
+		try {
+
+			Statement st = (Statement) conn.createStatement();
+			st.executeUpdate("DELETE FROM Teacher " + "WHERE Id=" + id + ";");
+
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		/*
+		 * TODO Execute an SQL statement that deletes teacher from database. Delete
+		 * teacher by it's ID If one teacher is successfully deleted, return true If no
+		 * teacher is deleted return false
+		 */
+		// return false;
+	}
+
+	public void closeConnection() {
+		/*
+		 * TODO Close connection to the database server and reset conn object to null
+		 */
+
+		try {
+			conn.close();
+			conn = null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
