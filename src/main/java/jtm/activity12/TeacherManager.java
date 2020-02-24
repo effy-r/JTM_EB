@@ -18,17 +18,26 @@ public class TeacherManager {
 
     public TeacherManager() {
     	
-    	try {{
+    	try {
     	
     	 Class.forName("com.mysql.jdbc.Driver"); // Load the driver class.
+    	 conn = DriverManager.getConnection(
+                 "jdbc:mysql://localhost:3306/db?autoReconnect=true&useSSL=false&characterEncoding=utf8", "admin", "abcd1234"
+         );
+    	 
     	}
     	catch (Exception e) {
     		System.err.println(e);
     	}
     	finally {
-    		conn.close();
+    		try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
-    }
+    
         /* TODO
 		  When new TeacherManager is created, create connection to the database server:
 
